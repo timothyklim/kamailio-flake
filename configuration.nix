@@ -32,6 +32,9 @@ in
     users.groups.kamailio.gid = 8771;
 
     systemd = {
+      tmpfiles.rules = [
+        "d /var/run/kamailio 0775 kamailio kamailio - -"
+      ];
       services.kamailio = {
         description = "Kamailio";
 
