@@ -27,7 +27,7 @@ stdenv.mkDerivation {
       -e 's;-I\$(LOCALBASE);-I${libmysqlclient.dev};g' \
       src/modules/db_mysql/Makefile
 
-    sed -i 's;# DBENGINE=MYSQL;DBENGINE=MYSQL;g' utils/kamctlrc/kamctlrc
+    sed -i 's;# DBENGINE=MYSQL;DBENGINE=MYSQL;g' utils/kamctl/kamctlrc
   '';
 
   buildPhase = ''
