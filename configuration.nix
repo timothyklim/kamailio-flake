@@ -15,7 +15,7 @@ in
       package = mkOption {
         type = types.package;
         description = ''
-          Lamailio package.
+          Kamailio package.
         '';
       };
     };
@@ -54,8 +54,6 @@ in
           RestartSec = 1;
 
           LimitNOFILE = mkDefault 1048576;
-
-          ReadWriteDirectories = [ cfg.persistedDir ];
 
           AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
           CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
