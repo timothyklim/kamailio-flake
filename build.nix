@@ -7,6 +7,7 @@ with pkgs; stdenv.mkDerivation {
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
+    gnugrep
     which
     flex
     bison
@@ -20,12 +21,21 @@ with pkgs; stdenv.mkDerivation {
   phases = ["unpackPhase" "patchPhase" "buildPhase" "installPhase"];
 
   patchPhase = ''
+    patchShebangs utils/kamctl/kamctl
+
     sed -i \
       -e 's;-L\$(LOCALBASE);-L${libmysqlclient};g' \
       -e 's;-I\$(LOCALBASE);-I${libmysqlclient.dev};g' \
       src/modules/db_mysql/Makefile
 
-    sed -i 's;# DBENGINE=MYSQL;DBENGINE=MYSQL;g' utils/kamctl/kamctlrc
+    sed -i \
+      -e 's;# DBENGINE=MYSQL;DBENGINE=MYSQL;g' \
+      -e 's;# AWK;AWK;g' \
+      -e 's;# EGREP;EGREP;g' \
+      -e 's;# EXPR;EXPR;g' \
+      -e 's;# LAST_LINE;LAST_LINE;g' \
+      -e 's;# MD5;MD5;g' \
+      utils/kamctl/kamctlrc
   '';
 
   buildPhase = ''
