@@ -33,7 +33,7 @@ in
 
     systemd = {
       tmpfiles.rules = [
-        "d /var/run/kamailio 0775 kamailio kamailio - -"
+        "d /run/kamailio 0775 kamailio kamailio - -"
       ];
       services.kamailio = {
         description = "Kamailio";
