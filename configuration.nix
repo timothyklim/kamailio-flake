@@ -55,6 +55,8 @@ in
 
           LimitNOFILE = mkDefault 1048576;
 
+          ReadWriteDirectories = [ "/var/run/kamailio" ];
+
           AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
           CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
 
