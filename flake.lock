@@ -15,6 +15,22 @@
         "type": "github"
       }
     },
+    "kamcli-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686130460,
+        "narHash": "sha256-Gp7rrgur+83OKYLMYH7sRiRZ6HkKxvn/UobX+A3hy24=",
+        "owner": "kamailio",
+        "repo": "kamcli",
+        "rev": "0f1a0775be1ef95488d69a16958f1b3c5cd629b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kamailio",
+        "repo": "kamcli",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1687193290,
@@ -34,6 +50,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "kamcli-src": "kamcli-src",
         "nixpkgs": "nixpkgs",
         "src": "src"
       }

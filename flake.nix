@@ -9,15 +9,23 @@
       url = "github:kamailio/kamailio/5.7.0";
       flake = false;
     };
+    kamcli-src = {
+      url = "github:kamailio/kamcli";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, src }:
+  outputs = { self, nixpkgs, flake-utils, src, kamcli-src }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
       kamailio = import ./build.nix { inherit pkgs src; };
       kamailio-app = flake-utils.lib.mkApp { drv = kamailio; };
-      derivation = { inherit kamailio; };
+      kamcli = import ./kamcli/build.nix {
+        inherit pkgs;
+        src = kamcli-src;
+      };
+      derivation = { inherit kamailio kamcli; };
     in
     rec {
       packages.${system} = derivation // { default = kamailio; };
@@ -36,6 +44,7 @@
         services.kamailio = {
           package = pkgs.lib.mkDefault kamailio;
         };
+        environment.systemPackages = [ kamcli ];
       };
       overlays.default = final: prev: derivation;
     };

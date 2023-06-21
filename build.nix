@@ -1,8 +1,6 @@
 { pkgs, src }:
 
-with pkgs;
-
-stdenv.mkDerivation {
+with pkgs; stdenv.mkDerivation {
   inherit src;
 
   name = "kamailio";
