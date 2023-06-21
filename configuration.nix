@@ -18,6 +18,14 @@ in
           Kamailio package.
         '';
       };
+
+      config = mkOption {
+        default = null;
+        type = lib.types.nullOr types.path;
+        description = ''
+          Kamailio kamailio.cfg file.
+        '';
+      };
     };
   };
 
@@ -45,7 +53,11 @@ in
         path = [ cfg.package ];
 
         serviceConfig = {
-          ExecStart = "${cfg.package}/sbin/kamailio -f ${cfg.package}/etc/kamailio/kamailio.cfg";
+          ExecStart =
+            let
+              config = if cfg.config != null then (toString cfg.config) else "${cfg.package}/etc/kamailio/kamailio.cfg";
+            in
+            "${cfg.package}/sbin/kamailio -f ${config}";
           User = "kamailio";
           Group = "kamailio";
           WorkingDirectory = cfg.package;

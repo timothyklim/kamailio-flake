@@ -47,5 +47,6 @@
         environment.systemPackages = [ kamcli ];
       };
       overlays.default = final: prev: derivation;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     };
 }

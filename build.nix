@@ -18,7 +18,7 @@ with pkgs; stdenv.mkDerivation {
     libmysqlclient
   ];
 
-  phases = ["unpackPhase" "patchPhase" "buildPhase" "installPhase"];
+  phases = [ "unpackPhase" "patchPhase" "buildPhase" "installPhase" ];
 
   patchPhase = ''
     patchShebangs utils/kamctl/kamctl
